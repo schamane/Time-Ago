@@ -1,7 +1,8 @@
 # YUI3 time ago widget
 
 widget that will show some time ago in human readable format made as YUI3 module.
-Based on jQuery widget http://github.com/rmm5t/jquery-timeago
+
+Based on [jQuery widget](http://github.com/rmm5t/jquery-timeago).
 
 ## USAGE
 HTML5 code like that:
@@ -27,11 +28,13 @@ Time: 20 minutes
 </pre>
 
 ## TODO
-	> Better inline documentation
-	> Internationalization of the messages.
-	> Cleanups
+
+*	Better inline documentation
+*	Internationalization of the messages.
+*	Cleanups
 
 
 ## LICENSING
 TimeAgo widget is released under the [BSD License](http://creativecommons.org/licenses/BSD/).
+
 Copyright (c) 2010, Nazar Kulyk

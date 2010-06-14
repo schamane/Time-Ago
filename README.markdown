@@ -5,13 +5,13 @@ Based on jQuery widget http://github.com/rmm5t/jquery-timeago
 
 ## USAGE
 HTML5 code like that:
-<div id="content">
-    <items>
-	<item></item>
-	Time: <time datetime="2010-06-14T20:01:09+01:00">June 14th 2010 at 20:28</time>
-    </items>
-</div>
-<script type="text/javascript" src="timeago-min.js"></script>
+	<div id="content">
+    	<items>
+		<item></item>
+		Time: <time datetime="2010-06-14T20:01:09+01:00">June 14th 2010 at 20:28</time>
+    	</items>
+	</div>
+	<script type="text/javascript" src="timeago-min.js"></script>
 
 And than
 <pre>
@@ -27,9 +27,9 @@ Time: 20 minutes
 </pre>
 
 ## TODO
-> Better inline documentation
-> Internationalization of the messages.
-> Cleanups
+	> Better inline documentation
+	> Internationalization of the messages.
+	> Cleanups
 
 
 ## LICENSING

@@ -9,22 +9,27 @@ HTML5 code like that:
 	<div id="content">
     	<items>
 		<item></item>
-		Time: <time datetime="2010-06-14T20:01:09+01:00">June 14th 2010 at 20:28</time>
+		Time: <time datetime="2010-06-14T20:01:09+01:00">June 14th 2010 at 21:28</time>
+    	<item></item>
+		Time: <time datetime="2010-06-13T10:21:00+01:00">June 13th 2010 at 11:21</time>
     	</items>
 	</div>
 	<script type="text/javascript" src="timeago-min.js"></script>
 
 And than
 <pre>
-    var timeAgo = new Y.TimeAgo({
-	contentBox: "#content items time"
+	YUI().use('base', 'time-ago', function(Y) {
+    	var timeAgo = new Y.TimeAgo({
+			contentBox: "#content items time"
+    	});
+    	timeAgo.startUpdates();
     });
-    timeAgo.startUpdates();
 </pre>
 
 Result something like that:
 <pre>
 Time: 20 minutes
+Time: 1 days
 </pre>
 
 ## TODO

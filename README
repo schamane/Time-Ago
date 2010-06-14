@@ -5,7 +5,7 @@ Based on jQuery widget http://github.com/rmm5t/jquery-timeago
 
 USAGE
 HTML5 code like that:
-<code>
+<pre>
 <div id="content">
     <items>
 	<item></item>
@@ -13,20 +13,20 @@ HTML5 code like that:
     </items>
 </div>
 <script type="text/javascript" src="timeago-min.js"></script>
-</code>
+</pre>
 
 And than
-<code>
+<pre>
     var timeAgo = new Y.TimeAgo({
 	contentBox: "#content items time"
     });
     timeAgo.startUpdates();
-</code>
+</pre>
 
 Result something like that:
-<code>
+<pre>
 Time: 20 minutes
-</code>
+</pre>
 
 TODO
 * Better inline documentation

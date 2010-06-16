@@ -1,7 +1,7 @@
 /*
  * A yui 3 timeago widget
  * 
- * @module TimeAgo
+ * @module time-ago
  * @requires oop, base, dom,  node
  */
  
@@ -17,10 +17,17 @@
  */
 YUI.add('time-ago', function(Y) {
 
+    /*
+     * @constructor
+     * @param {Object} config to be used to setup widget
+     */
     function TimeAgo(config) {
 	TimeAgo.superclass.constructor.apply(this, arguments);
     }
-
+    
+    /*
+     * Static Properties
+     */
     TimeAgo.NAME = "timeAgo";
     TimeAgo.CLASS_NAME = "yui-time-ago";
     TimeAgo.refreshMillis= 60000;
@@ -43,6 +50,11 @@ YUI.add('time-ago', function(Y) {
 
     Y.extend( TimeAgo, Y.Base );
 
+    /*
+     * Overwrite standard Y.Base.initializer method to setup widget
+     * @method initializer
+     * @param {Object} cfg object with setup properties
+     */
     TimeAgo.prototype.initializer = function(cfg) {
 	var elements = Y.all(cfg.contentBox);
 	
@@ -54,18 +66,30 @@ YUI.add('time-ago', function(Y) {
 	this.refreshMillis = cfg.refreshMillis ? cfg.refreshMillis : TimeAgo.refreshMillis;
     }
 
+    /*
+     * Destroy and cleanup
+     * @method destroy
+     */
     TimeAgo.prototype.destroy = function() {
 	delete this.elements;
 	this.elements = null;
     }
 
+    /*
+     * update content of the dom elements that show time ago information
+     * @method update
+     */
     TimeAgo.prototype.update = function() {
 	this.elements.each(function(node) {
 	    var timeago = this._distance(node._datetime);
 	    node.set('innerHTML', this._inWords(timeago));
 	}, this, true);
     }
-    
+
+    /*
+     * refresh widget with whole recalculation of the dom element list and datetime values
+     * @method refresh
+     */
     TimeAgo.prototype.refresh = function() {
 	var timerId = this.timerId;
 	if(timerId)
@@ -79,24 +103,43 @@ YUI.add('time-ago', function(Y) {
 	}
     }
 
+    /*
+     * update values from dom for date time and hold it internaly
+     * @method updateDateTimes
+     */
     TimeAgo.prototype.updateDateTimes = function() {
 	this.elements.each( function(node) {
 	    var datetime = node.getAttribute("datetime");
 	    node._datetime = this._parse(datetime);
 	}, this, true);
     }
-    
+
+    /*
+     * start widget automaticaly update it self and dom elements content
+     * @method startUpdates
+     */
     TimeAgo.prototype.startUpdates = function() {
 	if(!this.timerId)
 	    this._recall();
     }
-    
+
+    /*
+     * stop widget automatical update it self and dom elements content
+     * @method stopUpdates
+     */
     TimeAgo.prototype.stopUpdates = function() {
 	if(this.timerId)
 	    this.timerId.cancel();
 	this.timerId = null;
     }
-    
+
+    /*
+     * calculate human readable string for the date based on datetime
+     * @method _inWords
+     * @private
+     * @param {int} distance in miliseconds from current time
+     * @return {String} value to show as content of the dom element
+     */
     TimeAgo.prototype._inWords = function(distance) {
 	var sec = distance/1000,
 	    min = sec/60,
@@ -124,10 +167,24 @@ YUI.add('time-ago', function(Y) {
 	return [str.prefixAgo, words, str.suffixAgo].join(" ");
     }
 
+    /*
+     * calculate distance from current time to given date in miliseconds
+     * @method _distance
+     * @private
+     * @param {int} date given to calculate distance
+     * @return {int} the distance value
+     */
     TimeAgo.prototype._distance = function(date) {
 	return (new Date().getTime() - date.getTime());
     }
 
+    /*
+     * convert iso8601 to date value
+     * @method _parse
+     * @private
+     * @param {String} iso8601 time in string format
+     * @return {int} the date value
+     */
     TimeAgo.prototype._parse = function(iso8601) {
 	var s = Y.Lang.trim(iso8601);
 	
@@ -136,7 +193,12 @@ YUI.add('time-ago', function(Y) {
 	s = s.replace(/([\+-]\d\d)\:?(\d\d)/," $1$2"); // -04:00 -> -0400
 	return new Date(s);
     }
-    
+
+    /*
+     * self calling method to do refresh of the dom content every x miliseconds
+     * @method _recall
+     * @private
+     */
     TimeAgo.prototype._recall = function() {
 	var refreshMillis = this.refreshMillis;
 	if(refreshMillis <= 0)
